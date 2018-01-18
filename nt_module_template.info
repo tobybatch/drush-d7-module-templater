@@ -1,0 +1,3 @@
+name = Drush module template
+description = Drush module to create a new module.
+core = 7.x

@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * UCF_MODULE install functions.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function MODULE_NAME_install() {
+
+}

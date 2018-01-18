@@ -1,0 +1,12 @@
+name = UCF_MODULE_NAME
+description = UCF_MODULE_NAME functions.
+configure = admin/config/MODULE_NAME/MODULE_NAME
+package = PACKAGE_NAME
+
+core = 7.x
+
+php = 7.0
+
+; version =
+; dependencies[] =
+; files[] =

@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * UCF_MODULE functions.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function MODULE_NAME_menu() {
+  $items = array();
+
+  $items['admin/config/PACKAGE_NAME/MODULE_NAME'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('MODULE_NAME_admin_form'),
+    'title' => 'UCF_MODULE Form',
+    'access arguments' => array('Administer UCF_MODULE'),
+    'file' => 'MODULE_NAME.admin.inc',
+  );
+
+  $items['admin/config/PACKAGE_NAME/MODULE_NAME/MODULE_NAME'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('MODULE_NAME_admin_form'),
+    'title' => 'UCF_MODULE Form',
+    'access arguments' => array('Administer UCF_MODULE'),
+    'file' => 'MODULE_NAME.admin.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 10,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function MODULE_NAME_permission() {
+  return array(
+    'Administer UCF_MODULE' => array(
+      'title' => t('Administer UCF_MODULE'),
+      'description' => t('Perform administration tasks for UCF_MODULE.'),
+    ),
+  );
+}
