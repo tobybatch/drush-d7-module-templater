@@ -13,15 +13,15 @@ function MODULE_NAME_admin_form() {
 
   $form['MODULE_NAME'] = array(
         '#type' => 'fieldset',
-    '#title' => t('UCF_MODULE_NAME'),
+    '#title' => t('UCF_MODULE'),
   );
 
   $form['MODULE_NAME']['MODULE_NAME_vars'] = array(
         '#type' => 'textarea',
-    '#title' => t('UCF_MODULE_NAME variables'),
-        '#rows' => 20,
-    '#description' => t('Arbitary variable to store for UCF_MODULE_NAME.'),
-        '#default_value' => variable_get('MODULE_NAME_vars', ''),
+    '#title' => t('UCF_MODULE variables'),
+    '#rows' => 20,
+    '#description' => t('Arbitary variable to store for UCF_MODULE.'),
+    '#default_value' => variable_get('MODULE_NAME_vars', ''),
     );
 
     $form['MODULE_NAME']['MODULE_NAME_submit'] = array(

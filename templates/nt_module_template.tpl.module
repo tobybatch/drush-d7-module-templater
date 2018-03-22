@@ -11,7 +11,7 @@
 function MODULE_NAME_menu() {
   $items = array();
 
-  $items['admin/config/PACKAGE_NAME/MODULE_NAME'] = array(
+  $items['admin/config/ADM_NAME/MODULE_NAME'] = array(
     'page callback' => 'drupal_get_form',
     'page arguments' => array('MODULE_NAME_admin_form'),
     'title' => 'UCF_MODULE Form',
@@ -19,7 +19,7 @@ function MODULE_NAME_menu() {
     'file' => 'MODULE_NAME.admin.inc',
   );
 
-  $items['admin/config/PACKAGE_NAME/MODULE_NAME/MODULE_NAME'] = array(
+  $items['admin/config/ADM_NAME/MODULE_NAME/MODULE_NAME'] = array(
     'page callback' => 'drupal_get_form',
     'page arguments' => array('MODULE_NAME_admin_form'),
     'title' => 'UCF_MODULE Form',

@@ -14,7 +14,9 @@ function nt_module_template_drush_command() {
       'path' => 'The path to the new module.',
     ),
     'options' => array(
-      'package' => 'The name of the package to create.',
+      'admin_path' => 'The short package name used as a componemt in the url paths. (default=other)',
+      'package' => 'The name of the package to create. (default=ucfirst(admin_path))',
+      'php_min_ver' => 'PHP Version. (default=7.0)',
     ),
     'bootstrap' => DRUSH_BOOTSTRAP_NONE,
   );
@@ -34,6 +36,8 @@ function drush_nt_module_template($path) {
   $parent_path = dirname($module_path);
 
   $package_name = drush_get_option('package', 'Other');
+  $admin_path = drush_get_option('admin_path', strtolower($package_name));
+  $php_ver = drush_get_option('php_min_ver', '7.0');
 
   if (!is_dir($parent_path)) {
     drush_print('Parent path (@parent) does not exist.  Will not continue.', array('@parent' => $parent_path));
@@ -45,10 +49,10 @@ function drush_nt_module_template($path) {
     mkdir($module_path, 0755);
   }
 
-  $module = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.module', $module_name, $package_name);
-  $info = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.info', $module_name, $package_name);
-  $admin = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.admin.tpl.inc', $module_name, $package_name);
-  $install = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.install', $module_name, $package_name);
+  $module = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.module', $module_name, $package_name, $admin_path, $php_ver);
+  $info = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.info', $module_name, $package_name, $admin_path, $php_ver);
+  $admin = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.admin.tpl.inc', $module_name, $package_name, $admin_path, $php_ver);
+  $install = drush_nt_module_template_parse(__DIR__ . '/templates/nt_module_template.tpl.install', $module_name, $package_name, $admin_path, $php_ver);
 
   $file_module = $module_path . '/' . $module_name . '.module';
   $file_info = $module_path . '/' . $module_name . '.info';
@@ -68,15 +72,15 @@ function drush_nt_module_template($path) {
   drush_print('Created ' . $file_install);
 }
 
-function drush_nt_module_template_parse($file, $module, $package) {
+function drush_nt_module_template_parse($file, $module, $package, $admin_path, $php_ver) {
   $ucf = ucfirst(str_replace('_', ' ', $module));
   $contents = file_get_contents($file);
-  $parsed = str_replace(
-      'MODULE_NAME', $module, str_replace(
-          'UCF_MODULE_NAME', $ucf, str_replace(
-              'PACKAGE_NAME', $package, $contents
-          )
-      )
-  );
-  return $parsed;
+
+  $contents = str_replace('UCF_MODULE', $ucf, $contents);
+  $contents = str_replace('ADM_NAME', $admin_path, $contents);
+  $contents = str_replace('MODULE_NAME', $module, $contents);
+  $contents = str_replace('PACKAGE', $package, $contents);
+  $contents = str_replace('MIN_PHP_VER', $php_ver, $contents);
+
+  return $contents;
 }
