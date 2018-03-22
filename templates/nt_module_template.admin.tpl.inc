@@ -24,7 +24,7 @@ function MODULE_NAME_admin_form() {
         '#default_value' => variable_get('MODULE_NAME_vars', ''),
     );
 
-    $form['MODULE_NAME'] = array(
+    $form['MODULE_NAME']['MODULE_NAME_submit'] = array(
         '#type' => 'submit',
     '#value' => 'Save Settings',
   );
